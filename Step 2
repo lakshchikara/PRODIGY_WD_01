@@ -1,0 +1,9 @@
+from transformers import GPT2Tokenizer
+
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+tokenizer.pad_token = tokenizer.eos_token  # Avoid padding issues
+
+with open("custom_dataset.txt", "r", encoding='utf-8') as f:
+    data = f.read()
+
+tokens = tokenizer(data, return_tensors='pt', truncation=True, padding=True)
